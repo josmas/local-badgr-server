@@ -1,8 +1,9 @@
 # Badgr.io local server setup
 This is a development setup, not intended for production. It is intended to be
-used as a local Badgr server in an scenario in which Badgr is used as a
-dependency. One such case is [PaperBadger](https://github.com/mozillascience/PaperBadger),
-but it can be used for any other project. This is __not__ a development environment for the
+used as a local [Badgr](https://github.com/concentricsky/badgr-server) server
+in an scenario in which Badgr is used as a dependency. One such case is
+[PaperBadger](https://github.com/mozillascience/PaperBadger),
+but it can be used for any other projects. This is __not__ a development environment for the
 Badgr server itself, but a way to easily run the server within a local setup to be used as
 a dependency. As such, the Badgr sources are hosted within the container
 (not shared with the host), the latest code on github (at install time) will be pulled in,
@@ -13,23 +14,28 @@ more (hopefully no less) dependencies that it actually needs.
 
 # How to build the image
 Build the image with:
-`docker build -t <your_name>/local-badgr-server .` do not forget the dot at the
-end, and change _<your_name>_ to your _docker hub_ username or some other of your choosing.
 
-The image creates a 'badgr' user with no password and in the sudoers group.
-The sources are at `/home/badgr/badgr-server`.
+`docker build -t <your_name>/local-badgr-server .`
+
+Do not forget the _dot_ at the end of the build command, and change your_name to your
+_docker hub_ username or some other name of your choosing.
+
+The image is based on Ubuntu 14.04, and it creates a 'badgr' user with no password and in the
+sudoers group. The sources are at `/home/badgr/badgr-server`.
 
 # How to use the image
-Use the script _runBashBadgr.sh_ to start a bash session with the badgr user. Make sure you
-change _<your_name>_ to the name you used when building the image. The script simply runs a
-bash session in the container so you can take it from there. You can run it manually with:
+You can use the script _runBashBadgr.sh_ to start a bash session with the _badgr_ user. Make sure you
+modify the script to change your_name to the name you used when building the image. The script
+simply runs a bash session in the container so you can take it from there.
+You can run it manually with:
 
 `docker run -ti --rm --name local-badgr-server -p 8000:8000 <your_name>/local-badgr-server /bin/bash`
 
-The first time you run the container you will probably want to create a
-superuser with:
+The first time you run the container you will probably want to create a Django superuser with:
 
-`./manage.py createsuperuser` Follow the prompts to provide the information
+`./manage.py createsuperuser`
+
+Follow the prompts to provide the information
 needed. The migrations have already been run, but any changes you make once you
 start using the image, will need to be _committed_ to the container.
 
@@ -37,7 +43,7 @@ Start up the server with:
 
 `./manage.py runserver`
 
-As specified in the Dockerfile, virtualenv is not used, but everything is in place if you would
+As specified in the Dockerfile, _virtualenv_ is not used, but everything is in place if you would
 like to do so.
 
 Note that any changes you make to either the container, the code, or the DB, will have to be
@@ -53,6 +59,13 @@ changes when needed. For instance, you may need to start up the server as follow
 
 You will also have to change the HTTP_ORIGIN variable in the local settings
 file `apps/mainsite/settings_local.py` to point to your ip:port. More 
-[info](https://github.com/concentricsky/badgr-server/issues/33) about why that change is needed. 
+[info](https://github.com/concentricsky/badgr-server/issues/33) about why that change is needed.
+
+## Notes about the Badgr server
+The Badgr server verifies all accounts (including the superuser) through email. When creating an
+account (or logging in for the first time as a superuser), the server will print the verification
+URL in the terminal as a log statement. This URL can be copied and pasted in the browser to verify
+the account. For more information about the Badgr-server, please consult their
+[docs](https://github.com/concentricsky/badgr-server).
 
 Jos - May 2o16
