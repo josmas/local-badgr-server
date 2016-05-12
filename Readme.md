@@ -1,4 +1,4 @@
-# Badgr.io local server setup
+# Badgr-server local setup
 This is a development setup, not intended for production. It is intended to be
 used as a local [Badgr](https://github.com/concentricsky/badgr-server) server
 in an scenario in which Badgr is used as a dependency. One such case is
