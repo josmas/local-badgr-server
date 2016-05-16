@@ -41,7 +41,7 @@ start using the image, will need to be _committed_ to the container.
 
 Start up the server with:
 
-`./manage.py runserver`
+`./manage.py runserver 0.0.0.0:8000`
 
 As specified in the Dockerfile, _virtualenv_ is not used, but everything is in place if you would
 like to do so.
@@ -54,8 +54,7 @@ if they need to be available when you restart the container.
 
 If you are not on Docker Beta, and your Docker does not run natively, this server will be
 available in an ip such as `http://192.168.99.100:8000/`. Make sure you make the appropriate
-changes when needed. For instance, you may need to start up the server as follows:
-`./manage.py runserver 0.0.0.0:8000`
+changes when needed.
 
 You will also have to change the HTTP_ORIGIN variable in the local settings
 file `apps/mainsite/settings_local.py` to point to your ip:port. More 
