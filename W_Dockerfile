@@ -1,0 +1,13 @@
+FROM windowsservercore
+
+RUN powershell -Command \
+    Invoke-WebRequest -Method Get -Uri <URL>
+    Invoke-WebRequest -Method Get -Uri <URL of output>
+    C:\\couchbase.exe /s /f1"c:\\<install.iss>" ;
+
+WORKDIR C:\\Couchbase\\Server\\bin
+
+RUN powershell -Command Start-Sleep -Seconds 120; \
+    <stop.bat file>>
+
+CMD ["<start.bat file>"]
