@@ -1,7 +1,7 @@
 FROM ubuntu:14.04
 
 # Build with
-#    docker build -t <your_name>/local-badgr-server .
+#    docker build -t <your_name>/local-badgr-server-master .
 
 RUN apt-get update
 
