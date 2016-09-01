@@ -62,3 +62,15 @@ RUN git clone https://github.com/concentricsky/badgr-server.git \
     && source $NVM_DIR/nvm.sh && nvm use default &&npm install \
     && grunt dist
 
+# Copy DB from assets/database. DB has a superuser: b@d.gr/admin
+COPY assets/database/local.sqlite3 /home/badgr/badgr-server/
+
+# Copy images for issuer and badges, after creating the appropriate folders
+RUN mkdir /home/badgr/badgr-server/mediafiles
+RUN mkdir /home/badgr/badgr-server/mediafiles/uploads
+RUN mkdir /home/badgr/badgr-server/mediafiles/uploads/badges
+COPY assets/images/issuer_badgeclass_* /home/badgr/badgr-server/mediafiles/uploads/badges/
+
+RUN mkdir /home/badgr/badgr-server/mediafiles/uploads/issuers
+COPY assets/images/issuer_logo* /home/badgr/badgr-server/mediafiles/uploads/issuers/
+
