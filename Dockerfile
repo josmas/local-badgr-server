@@ -52,7 +52,7 @@ RUN sudo gem install sass --no-rdoc --no-ri
 
 # Installing Badgr
 RUN source $NVM_DIR/nvm.sh && nvm use default && npm install -g grunt-cli 
-# Not running virtaulenv because this server will only run Badgr requirements.
+# Not running virtualenv because this server will only run Badgr requirements.
 # If it is needed, add to the next RUN (before pip) ' && virtualenv env && source env/bin/activate \'
 RUN git clone https://github.com/concentricsky/badgr-server.git \
     && cd badgr-server \
