@@ -25,19 +25,14 @@ sudoers group. The sources are at `/home/badgr/badgr-server`.
 
 # How to use the image
 You can use the script _runBashBadgr.sh_ to start a bash session with the _badgr_ user. Make sure you
-modify the script to change your_name to the name you used when building the image. The script
+modify the script to change _<your_name>_ to the name you used when building the image. The script
 simply runs a bash session in the container so you can take it from there.
 You can run it manually with:
 
 `docker run -ti --rm --name local-badgr-server -p 8000:8000 <your_name>/local-badgr-server /bin/bash`
 
-The first time you run the container you will probably want to create a Django superuser with:
-
-`./manage.py createsuperuser`
-
-Follow the prompts to provide the information
-needed. The migrations have already been run, but any changes you make once you
-start using the image, will need to be _committed_ to the container.
+The database copied into the container contains an _Issuer_ and a number of _badges_.
+It also contains a superuser: the _username_ and _password_ are ___admin___, and the email address is _b@d.gr_.
 
 Start up the server with:
 
@@ -57,7 +52,7 @@ available in an ip such as `http://192.168.99.100:8000/`. Make sure you make the
 changes when needed.
 
 You will also have to change the HTTP_ORIGIN variable in the local settings
-file `apps/mainsite/settings_local.py` to point to your ip:port. More 
+file `apps/mainsite/settings_local.py` to point to your ip:port. More
 [info](https://github.com/concentricsky/badgr-server/issues/33) about why that change is needed.
 
 ## Notes about the Badgr server
