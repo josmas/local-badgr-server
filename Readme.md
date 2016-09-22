@@ -31,7 +31,8 @@ You can run it manually with:
 
 `docker run -ti --rm --name local-badgr-server -p 8000:8000 <your_name>/local-badgr-server /bin/bash`
 
-The database copied into the container contains an _Issuer_ and a number of _badges_.
+The database copied into the container contains an _Issuer_, a number of
+_badges_, and a number of _badge instances_.
 It also contains a superuser: the _username_ and _password_ are ___admin___, and the email address is _b@d.gr_.
 
 Start up the server with:
